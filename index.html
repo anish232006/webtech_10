@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuickBite Food Delivery – EXP 10 URK24CS1092</title>
+<style>
+body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#2b1208,#7c2d12);margin:0;padding:20px;color:#fff;min-height:100vh}
+.wrap{max-width:720px;margin:0 auto}
+.bar{display:flex;gap:8px;background:rgba(0,0,0,.35);border-radius:8px;padding:8px;margin-bottom:14px;align-items:center;flex-wrap:wrap}
+.bar span{font-family:monospace;color:#ffe082}
+.bar input{flex:1;min-width:140px;padding:7px;border-radius:6px;border:0;font-family:monospace}
+.bar button{padding:7px 12px;border:0;border-radius:6px;background:#ffb74d;font-weight:bold;cursor:pointer}
+.card{background:rgba(255,255,255,.08);border:1px solid #ffb74d;padding:24px 32px;border-radius:12px}
+h1{color:#ffb74d}nav a{color:#ffe082;margin-right:14px;text-decoration:none;font-weight:bold}
+.req{background:rgba(0,0,0,.3);padding:4px 14px;border-radius:6px;font-family:monospace}
+.note{font-size:.8rem;opacity:.8;margin-top:14px;text-align:center}
+</style></head><body><div class="wrap">
+<div class="bar"><span>http://localhost:3000</span><input id="u" value="/" aria-label="path"><button onclick="go()">Go</button></div>
+<div class="card" id="c"></div>
+<p class="note">Browser demo of server.js (Node.js http module) · Ex. 10 WTL · URK24CS1092<br>Try an unknown path such as /xyz to see the 404 response.</p></div>
+<script>
+var routes={
+"/":["Welcome to QuickBite Food Delivery!","This is a server-side application built with Node.js for the QuickBite Online Food Delivery website."],
+"/home":["Featured Restaurants","Spice Hub (Indian) • Pizza Palace (Italian) • Burger Barn (Fast Food) • Dragon Wok (Chinese)"],
+"/about":["About QuickBite","Customers browse restaurants, order food and track delivery partners in real time. This site is served using the built-in http module of Node.js. (URK24CS1092)"]};
+function path(){var h=location.hash.replace(/^#/,"");return h||"/"}
+function draw(){var p=path(),r=routes[p]||["404 - Dish Not Found","The requested page does not exist at QuickBite."];
+document.title=(routes[p]?r[0]:"404")+" – QuickBite";document.getElementById("u").value=p;
+var c=document.getElementById("c");c.innerHTML="";
+function el(t,x,k){var e=document.createElement(t);if(x)e.textContent=x;if(k)e.className=k;return e}
+var n=el("nav");[["🍔 Home","/"],["Restaurants","/home"],["About","/about"]].forEach(function(l){var a=el("a",l[0]);a.href="#"+l[1];n.appendChild(a)});
+c.appendChild(n);c.appendChild(el("h1",r[0]));c.appendChild(el("p",r[1]));
+var q=el("div","","req");q.appendChild(el("p","Request URL: "+p));q.appendChild(el("p","Request Method: GET"));c.appendChild(q)}
+function go(){var v=document.getElementById("u").value.trim()||"/";if(v.charAt(0)!="/")v="/"+v;location.hash=v;draw()}
+document.getElementById("u").addEventListener("keydown",function(e){if(e.key==="Enter")go()});
+window.addEventListener("hashchange",draw);draw();
+</script></body></html>
